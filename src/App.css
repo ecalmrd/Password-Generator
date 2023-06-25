@@ -1,0 +1,66 @@
+.section {
+    background-color: #151722;
+    height: 100vh;
+    padding: 1px;
+}
+
+.container {
+    background-color: #28282B;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border: solid;
+    border-radius: 10px;
+    height: 400px;
+    width: 800px;
+    padding-top: 20px;
+    margin: auto;
+}
+
+.text {
+    font-family: 'Orbitron';
+    font-weight: bold;
+    color: dark gray;
+}
+
+.generateButton {
+    font-family: 'Orbitron';
+    color: #F9F6EE;
+    background-color: #36454F;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+.textBox {
+    background-color: #f8fbf8;
+    font-family: 'Orbitron';
+    color: black;
+    height: 50px;
+    width: 550px;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    resize: 'none';
+}
+
+.formGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    font-family: 'Orbitron';
+    color: #f8fbf8;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+}
+
+.cardTitle {
+    font-family: 'Orbitron';
+    object-fit: contain;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    justify-content: flex-end;
+    color: #f8fbf8;
+}
