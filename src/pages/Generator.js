@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import '../App.css'
 
 export default function Generator() {
@@ -11,10 +10,10 @@ export default function Generator() {
 
     // Password prompts
     const [length, setLength] = useState(8);
-    const [lowercase, setLowercase] = useState(false);
-    const [uppercase, setUppercase] = useState(false);
-    const [numbers, setNumbers] = useState(false);
-    const [special, setSpecial] = useState(false);
+    const [lowercase, setLowercase] = useState(true);
+    const [uppercase, setUppercase] = useState(true);
+    const [numbers, setNumbers] = useState(true);
+    const [special, setSpecial] = useState(true);
     const [password, setPassword] = useState('');
 
     function handleChange(event) {
@@ -22,26 +21,28 @@ export default function Generator() {
     }
 
     function generatePassword() {
-        const length = parseInt(document.getElementById('password').value);
-        const lowercase = document.getElementById('lowerC').checked;
-        const uppercase = document.getElementById('upperC').checked;
-        const numbers = document.getElementById('numbers').checked;
-        const special = document.getElementById('special').checked;
+        let passCriteria = [];
+        if (lowercase) passCriteria.push(...alphaLower);
+        if (uppercase) passCriteria.push(...alphaUpper);
+        if (numbers) passCriteria.push(...numerics);
+        if (special) passCriteria.push(...specialChar);
 
-        let passCriteria = "";
-        if (lowercase) passCriteria += alphaLower;
-        if (uppercase) passCriteria += alphaUpper;
-        if (numbers) passCriteria += numerics;
-        if (special) passCriteria += specialChar;
+        if (passCriteria.length === 0) {
+            setPassword("Please select at least one character type.");
+            const passwordText = document.querySelector("#password");
+            passwordText.value = "Please select at least one character type.";
+            return;
+        }
 
         let password = "";
         for (let i = 0; i < length; i++) {
-            password = password + passCriteria[Math.floor(Math.random() * passCriteria.length)];
-            console.log(password);
+          password += passCriteria[Math.floor(Math.random() * passCriteria.length)];
         }
-        setPassword(password);
-    }
 
+        setPassword(password);
+        const passwordText = document.querySelector("#password");
+        passwordText.value = password;
+    }
 
     return (
         <section className='section'>
@@ -52,10 +53,12 @@ export default function Generator() {
                 <div className="card">
                     <div className="card-body" >
                         <textarea
+
                             className='textBox'
                             id="password"
                             placeholder="Your Secure Password"
                             aria-label="Generated Password"
+                            value={password} // Set the value of the text area to the password state
                         ></textarea>
                     </div>
 
@@ -77,10 +80,7 @@ export default function Generator() {
                         </label>
                     </form>
                     <div className="card-footer">
-                        <button className="generateButton" id="generateBtn" onClick={() => {
-                            const passwordText = document.querySelector("#password");
-                            passwordText.value = generatePassword();
-                        }}>Generate Password</button>
+                        <button className="generateButton" id="generateBtn" onClick={generatePassword}>Generate Password</button>
                     </div>
                 </div>
             </div>
@@ -88,5 +88,3 @@ export default function Generator() {
 
     );
 }
-
-
